@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Author as ModelsAuthor;
+use App\Author;
 use Illuminate\Http\Request;
 
 
@@ -15,7 +15,7 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        $author = ModelsAuthor::get();
+        $author = Author::get();
         if ($author && $author->count() > 0) {
             return response(["message" => "Show data success.", $author]);
         } else {
@@ -41,7 +41,7 @@ class AuthorController extends Controller
      */
     public function store(Request $request)
     {
-        $author = ModelsAuthor::create([
+        $author = Author::create([
             "name" => $request->name,
             "date_of_birth" => $request->date_of_birth,
             "place_of_birth" => $request->place_of_birth,
@@ -61,7 +61,7 @@ class AuthorController extends Controller
      */
     public function show($id)
     {
-        $author = ModelsAuthor::find($id);
+        $author = Author::find($id);
         if ($author && $author->count() > 0) {
             return response(["message" => "Show data success.", $author]);
         } else {
@@ -89,7 +89,7 @@ class AuthorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $author = ModelsAuthor::find($id);
+        $author = Author::find($id);
         $author->name = $request->name;
         $author->date_of_birth = $request->date_of_birth;
         $author->place_of_birth = $request->place_of_birth;
@@ -113,7 +113,7 @@ class AuthorController extends Controller
      */
     public function destroy($id)
     {
-        $author = ModelsAuthor::find($id);
+        $author = Author::find($id);
         if ($author && $author->count() > 0) {
             return $author->delete() . response(["message" => "Delete data success."]);
         } else {
